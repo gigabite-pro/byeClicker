@@ -37,6 +37,17 @@ h1{
     border: none;
 }
 
+p{
+    font-family: 'Sofia Pro';
+    font-size: 15px;
+    color: white;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    border: none;
+    display: none;
+}
+
 button{
     font-family: 'Sofia Pro';
     font-size: 15px;
@@ -51,4 +62,8 @@ button{
 
 button:hover{
     cursor: pointer;
+}
+
+#stop-btn {
+    display: none;
 }

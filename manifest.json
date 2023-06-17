@@ -16,12 +16,21 @@
         "128": "./assets/logo-128.png"
     },
     "permissions" : [
-        "tabs"
+        "tabs",
+        "storage"
+    ],
+    "host_permissions" : [
+        "https://student.iclicker.com/*"
     ],
     "content_scripts": [
         {
-            "matches": ["https://student.iclicker.com/*"],
-            "js": ["content.js"]
+            "matches": [
+                "https://student.iclicker.com/*"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "run_at": "document_end"
         }
     ],
     "background" : {
