@@ -23,5 +23,16 @@ A Chrome extension that automatically answers iClicker poll questions for you so
 - Select the downloaded folder.
 - Enjoy! 😉
 
+## How to Install (Safari - a very lengthy process)
+- Download the folder from the download link.
+- Download Xcode from the App Store. Open Xcode and let it download additional programs.
+- Open the terminal and run this command `sudo xcode-select -s /Application/Xcode.app`
+- Accept Xcode's licenses by running this command `sudo xcodebuild -license accept`
+- Then copy the path of the downloaded folder. Run this command `xcrun safari-web-extension-converter paste-the-copied-path-here`
+- It will open an Xcode window. You will see a triangle (Run button) on the left panel in the top right. Press it. It will add the extension to Safari.
+- Go to Safari's preferences -> Go to Advanced tab -> Check the `Show Develop menu in menu bar
+- Go to Develop menu in Safari's top menu -> Click on `Allow Unsigned Extensions`
+- Enjoy! 😉
+
 ## Download Link
 [Download the whole folder](https://drive.google.com/drive/folders/11aEZxcQcAxA3u0twSWbRTV3_NRRHvfpb?usp=sharing)
