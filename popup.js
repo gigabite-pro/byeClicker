@@ -2,6 +2,7 @@ const startBtn = document.getElementById('start-btn');
 const stopBtn = document.getElementById('stop-btn');
 const runStatus = document.getElementById('runStatus');
 const container = document.getElementById('container');
+const randomBtn = document.getElementById('random');
 
 document.addEventListener('DOMContentLoaded', () => {
     chrome.storage.local.get(['status'], function(result) {
@@ -15,6 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
             stopBtn.style.display = 'none';
         }
     });
+
+    chrome.storage.local.get(['random'], function(result) {
+        if (result.random == true) {
+            randomBtn.checked = true;
+        } else if (result.random == false || result == undefined) {
+            randomBtn.checked = false;
+        }
+    });
 }) ;
 
 chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -24,7 +33,9 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         container.innerHTML = '<h1>ByeClicker can\'t access Chrome Pages</h1>';
     } else if (tab.url.indexOf('file') == 0) {
         container.innerHTML = '<h1>ByeClicker can\'t access local files</h1>';
-    } else{
+    } else if (!tab.url.includes('student.iclicker.com')) {
+        container.innerHTML = '<h1>ByeClicker works only on iCliker pages</h1>';
+    } else {
         startBtn.addEventListener('click', () => {
             runStatus.style.display = 'block';
             startBtn.style.display = 'none';
@@ -39,6 +50,10 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
             stopBtn.style.display = 'none';
             chrome.tabs.sendMessage(tab.id, {from: 'popup', msg: 'stop'});
             window.close();
+        });
+
+        randomBtn.addEventListener('click', () => {
+            chrome.tabs.sendMessage(tab.id, {from: 'popup', msg: 'random'});
         });
     }
 });

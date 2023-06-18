@@ -7,14 +7,37 @@
     src: url('assets/Sofia\ Pro\ Bold\ Az.otf') format('opentype');
 }
 
-
 body{
     margin: 0;
     padding: 0;
     width: 200px;
-    height: 170px;
+    height: 200px;
     border: none;
-    border-radius: 20px;
+    background: none;
+}
+  
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+  
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 140px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
 }
 
 .container{
@@ -24,13 +47,23 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    background-color: black;
+    background-color: #E6658C;
+}
+
+.logo{
+    height: 50px;
+    width: 50px;
+    border: none;
+    background-image: url('assets/logo.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 h1{
     font-family: 'Sofia Pro Bold';
     font-size: 20px;
-    color: #fdd000;
+    color: white;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -45,6 +78,9 @@ p{
     padding: 0;
     text-align: center;
     border: none;
+}
+
+#runStatus {
     display: none;
 }
 
@@ -57,7 +93,7 @@ button{
     text-align: center;
     border: none;
     border-radius: 4px;
-    background-color: #fdd000;
+    background-color: white;
 }
 
 button:hover{
@@ -66,4 +102,35 @@ button:hover{
 
 #stop-btn {
     display: none;
+}
+
+#random {
+    outline: none;
+    vertical-align: middle;
+}
+
+.random {
+    font: 'Sofia Pro';
+    font-size: 13px;
+    color: white;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -3px;
+}
+
+.footer {
+    background-color: #E6658C;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer p {
+    font: 'Sofia Pro';
+    font-size: 13px;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
 }

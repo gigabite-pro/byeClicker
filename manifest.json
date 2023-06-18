@@ -17,7 +17,8 @@
     },
     "permissions" : [
         "tabs",
-        "storage"
+        "storage",
+        "management"
     ],
     "host_permissions" : [
         "https://student.iclicker.com/*"
@@ -25,7 +26,7 @@
     "content_scripts": [
         {
             "matches": [
-                "https://student.iclicker.com/*"
+                "https://student.iclicker.com/"
             ],
             "js": [
                 "content.js"
