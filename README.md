@@ -8,7 +8,7 @@ A Chrome extension that automatically answers iClicker poll questions for you so
 - Automatically stops once the instructor ends the session.
 
 ## How to use
-- Make sure you have joined the class.
+- **MAKE SURE YOU'VE JOINED THE CLASS!**
 - Click on the extension and a popup will open. You'll be able to see a **Start** button and a **Random** checkbox.
 - Clicking the **Start** button will start byeClicker.
 - If you want byeClicker to choose random answers, check the **Random** checkbox.
