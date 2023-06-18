@@ -22,3 +22,6 @@ A Chrome extension that automatically answers iClicker poll questions for you so
 - Click on Load Unpacked.
 - Select the downloaded folder.
 - Enjoy! 😉
+
+## Download Link
+[Download the whole folder](https://drive.google.com/drive/folders/11aEZxcQcAxA3u0twSWbRTV3_NRRHvfpb?usp=sharing)
