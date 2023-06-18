@@ -30,7 +30,7 @@ A Chrome extension that automatically answers iClicker poll questions for you so
 - Accept Xcode's licenses by running this command `sudo xcodebuild -license accept`
 - Then copy the path of the downloaded folder. Run this command `xcrun safari-web-extension-converter paste-the-copied-path-here`
 - It will open an Xcode window. You will see a triangle (Run button) on the left panel in the top right. Press it. It will add the extension to Safari.
-- Go to Safari's preferences -> Go to Advanced tab -> Check the `Show Develop menu in menu bar
+- Go to Safari's preferences -> Go to Advanced tab -> Check the `Show Develop menu in menu bar`
 - Go to Develop menu in Safari's top menu -> Click on `Allow Unsigned Extensions`
 - Enjoy! 😉
 
