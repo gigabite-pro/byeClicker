@@ -1,25 +1,21 @@
 window.onload = () => {
     chrome.storage.local.remove('status');
     chrome.storage.local.remove('random');
-    // Select the target node that you want to observe for changes
+
     const targetNode = document.querySelector('#main-wrapper');
 
     console.log(targetNode);
 
     let random = false;
 
-    // Configuration options for the observer
     const observerConfig = { 
-        childList: true,  // Watch for changes in the child nodes of the target
-        subtree: true,    // Watch for changes in the entire subtree of the target
+        childList: true, 
+        subtree: true, 
     };
 
     const observer = new MutationObserver(function(mutationsList) {
-        // Iterate over the list of mutations
         for (let mutation of mutationsList) {
-            // Handle the specific type of mutation you are interested in
             if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-                // Perform actions or execute code when a change is detected
                 for (let node of mutation.addedNodes) {
                     if (node instanceof Element) {
                         const url = window.location.href;
