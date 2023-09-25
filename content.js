@@ -29,7 +29,9 @@ window.onload = () => {
                                         var optionIndex = 0;
                                     }
                                     console.log('got the btn')
-                                    btns[optionIndex].children[0].click();
+                                    setTimeout(() => {
+                                        btns[optionIndex].children[0].click();
+                                    }, 10000);
                                 } catch (error) {
                                     console.log('buttons not found')
                                 }
@@ -61,7 +63,9 @@ window.onload = () => {
                         var optionIndex = 0;
                     }
                     console.log('got the btn')
-                    btns[optionIndex].children[0].click();
+                    setTimeout(() => {
+                        btns[optionIndex].children[0].click();
+                    }, 10000);
                 } catch (error) {
                     console.log('buttons not found')
                 }
