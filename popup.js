@@ -3,6 +3,7 @@ const stopBtn = document.getElementById('stop-btn');
 const runStatus = document.getElementById('runStatus');
 const container = document.getElementById('container');
 const randomBtn = document.getElementById('random');
+const autoJoinBtn = document.getElementById('autoJoin');
 
 document.addEventListener('DOMContentLoaded', () => {
     chrome.storage.local.get(['status'], function(result) {
@@ -22,6 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
             randomBtn.checked = true;
         } else if (result.random == false || result == undefined) {
             randomBtn.checked = false;
+        }
+    });
+
+    chrome.storage.local.get(['autoJoin'], function(result) {
+        if (result.autoJoin == true) {
+            autoJoinBtn.checked = true;
+        } else if (result.autoJoin == false || result == undefined) {
+            autoJoinBtn.checked = false;
         }
     });
 }) ;
@@ -54,6 +63,10 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 
         randomBtn.addEventListener('click', () => {
             chrome.tabs.sendMessage(tab.id, {from: 'popup', msg: 'random'});
+        });
+
+        autoJoinBtn.addEventListener('click', () => {
+            chrome.tabs.sendMessage(tab.id, {from: 'popup', msg: 'autoJoin'});
         });
     }
 });

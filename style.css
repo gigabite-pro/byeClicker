@@ -41,7 +41,7 @@ body{
 }
 
 .container{
-    height: 170px;
+    height: 200px;
     width: 200px;
     display: flex;
     flex-direction: column;
@@ -109,7 +109,7 @@ button:hover{
     vertical-align: middle;
 }
 
-.random {
+.random, .autoJoin {
     font: 'Sofia Pro';
     font-size: 13px;
     color: white;
@@ -117,6 +117,11 @@ button:hover{
     vertical-align: middle;
     margin-top: -3px;
 }
+
+.autoJoin{
+    margin-top: -11px;
+}
+
 
 .footer {
     background-color: #E6658C;
