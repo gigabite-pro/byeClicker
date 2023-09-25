@@ -1,6 +1,7 @@
 window.onload = () => {
     chrome.storage.local.remove('status');
     chrome.storage.local.remove('random');
+    chrome.storage.local.remove('autoJoin');
 
     const targetNode = document.querySelector('#main-wrapper');
 
@@ -88,12 +89,14 @@ window.onload = () => {
             } else if (url.includes('https://student.iclicker.com/#/courses') && url.includes('/tab/default')) {
                 chrome.storage.local.get(['status'], function(result) {
                     if (result.status != 'started') {
-                        try{
-                            if(document.querySelector('#join-inner-container').style.display == 'block') {
-                                document.querySelector('#btnJoin').click();
+                        if(autoJoin) {
+                            try{
+                                if(document.querySelector('#join-inner-container').style.display == 'block') {
+                                    document.querySelector('#btnJoin').click();
+                                }
+                            } catch (error) {
+                                console.log('join button not found')
                             }
-                        } catch (error) {
-                            console.log('join button not found')
                         }
                     }
                 });
