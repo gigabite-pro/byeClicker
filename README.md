@@ -3,12 +3,14 @@ A Chrome extension that automatically answers iClicker poll questions for you so
 
 ## Features
 - Automatically answers iClicker poll questions for attendance.
+- Can join the class automatically and start answering once the instructor starts the session.
 - Works in the background; so you can complete any other work peacefully (or sleep 😴).
 - Can answer randomly.
 - Automatically stops once the instructor ends the session.
 
 ## How to use
-- **MAKE SURE YOU'VE JOINED THE CLASS!**
+- Click on the **Auto Join** button and **Start** byeClicker to automatically join the class and start answering.
+- **MAKE SURE YOU'VE JOINED THE CLASS IF NOT USING AUTOJOIN!**
 - Click on the extension and a popup will open. You'll be able to see a **Start** button and a **Random** checkbox.
 - Clicking the **Start** button will start byeClicker.
 - If you want byeClicker to choose random answers, check the **Random** checkbox.
