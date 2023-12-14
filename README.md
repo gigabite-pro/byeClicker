@@ -40,4 +40,4 @@ A Chrome extension that automatically answers iClicker poll questions for you so
 [Download the whole folder](https://drive.google.com/drive/folders/11aEZxcQcAxA3u0twSWbRTV3_NRRHvfpb?usp=sharing)
 
 ## Download from the Chrome Web Store
-[Download here](https://chrome.google.com/webstore/detail/byeclicker/ebdlbapkcnflmacdljnmbbbliplnikih)
+[Download here](https://chrome.google.com/webstore/detail/byeclicker/kmnlnlkcacgjkngggifcnalkldgpflic)
