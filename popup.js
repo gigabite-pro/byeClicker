@@ -4,6 +4,8 @@ const runStatus = document.getElementById('runStatus');
 const container = document.getElementById('container');
 const randomBtn = document.getElementById('random');
 const autoJoinBtn = document.getElementById('autoJoin');
+const notifyBtn = document.getElementById('notify');
+const email = document.getElementById('email');
 
 document.addEventListener('DOMContentLoaded', () => {
     chrome.storage.local.get(['status'], function(result) {
@@ -31,6 +33,22 @@ document.addEventListener('DOMContentLoaded', () => {
             autoJoinBtn.checked = true;
         } else if (result.autoJoin == false || result == undefined) {
             autoJoinBtn.checked = false;
+        }
+    });
+
+    chrome.storage.local.get(['email'], function(result) {
+        if (result.email == undefined) {
+            email.value = '';
+        } else {
+            email.value = result.email;
+        }
+    });
+
+    chrome.storage.local.get(['notify'], function(result) {
+        if (result.notify == true) {
+            notifyBtn.checked = true;
+        } else if (result.notify == false || result == undefined ) {
+            notifyBtn.checked = false;
         }
     });
 }) ;
@@ -67,6 +85,10 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 
         autoJoinBtn.addEventListener('click', () => {
             chrome.tabs.sendMessage(tab.id, {from: 'popup', msg: 'autoJoin'});
+        });
+
+        notifyBtn.addEventListener('click', () => {
+            chrome.tabs.sendMessage(tab.id, {from: 'popup', msg: 'notify', email: email.value});
         });
     }
 });

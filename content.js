@@ -2,12 +2,16 @@ window.onload = () => {
     chrome.storage.local.remove('status');
     chrome.storage.local.remove('random');
     chrome.storage.local.remove('autoJoin');
+    chrome.storage.local.remove('email');
+    chrome.storage.local.remove('notify');
 
     const targetNode = document.querySelector('#main-wrapper');
+    const HOST = 'https://bye-clicker-api.vercel.app';
 
-    // console.log(targetNode);
     let random = false;
     let autoJoin = false;
+    let notify = false;
+    let fetchCalled = false;
 
     const observerConfig = { 
         attributes: true,  // Watch for attribute changes (e.g., style changes)
@@ -32,10 +36,40 @@ window.onload = () => {
                                     } else {
                                         var optionIndex = 0;
                                     }
-                                    setTimeout(() => {
-                                        console.log('got the btn')
-                                        btns[optionIndex].children[0].click();
-                                    }, 10000);
+                                    // notify backend to send email
+                                    if (notify && !fetchCalled) {
+                                        fetchCalled = true;
+                                        let img = "https://institutional-web-assets-share.s3.amazonaws.com/iClicker/student/images/image_hidden_2.png"
+                                        const imgContainer = document.getElementsByClassName('question-image-container');
+                                        setTimeout(() => {
+                                            const source = imgContainer[0].querySelectorAll('img')[1].src
+                                            if(source != undefined && source != "") {
+                                                img = imgContainer[0].querySelectorAll('img')[1].src;
+                                            }
+                                            callFurther();
+                                        }, 1000);
+                                        function callFurther() {
+                                            chrome.storage.local.get(['email'], (result) => {
+                                                const email = result.email;
+                                                fetch(`${HOST}/notify`, {
+                                                    method: 'POST',
+                                                    headers: {
+                                                        'Content-Type': 'application/json',
+                                                    },
+                                                    body: JSON.stringify({email: email, type: 'ques', img: img}),
+                                                })
+                                                .then(res => res.json())
+                                                .then(data => {
+                                                    // console.log(data);
+                                                    setTimeout(() => {
+                                                        btns[optionIndex].children[0].click();
+                                                    }, 9000);
+                                                    fetchCalled = false;
+                                                })
+                                                .catch(err => console.log(err));
+                                            });
+                                        }
+                                    }
                                 } catch (error) {
                                     console.log('buttons not found')
                                 }
@@ -53,6 +87,27 @@ window.onload = () => {
                     if(autoJoin) {
                         try{
                             if(document.querySelector('#join-inner-container').style.display == 'block') {
+                                if(notify && !fetchCalled) {
+                                    fetchCalled = true;
+                                    // notify backend to send email
+                                    chrome.storage.local.get(['email'], (result) => {
+                                        const email = result.email;
+                                        fetch(`${HOST}/notify`, {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                            },
+                                            body: JSON.stringify({email: email, type: 'classStart'}),
+                                        })
+                                        .then(res => res.json())
+                                        .then(data => {
+                                            // console.log(data);
+                                            document.querySelector('#btnJoin').click();
+                                            fetchCalled = false;
+                                        })
+                                        .catch(err => console.log(err));
+                                    });
+                                }
                                 document.querySelector('#btnJoin').click();
                             }
                         } catch (error) {
@@ -110,6 +165,10 @@ window.onload = () => {
         } else if (message.from == 'popup' && message.msg == 'autoJoin') {
             autoJoin = !autoJoin;
             chrome.storage.local.set({autoJoin: autoJoin});
+        } else if (message.from == 'popup' && message.msg == 'notify') {
+            notify = !notify;
+            chrome.storage.local.set({email: message.email});
+            chrome.storage.local.set({notify: notify});
         }
     });
 
@@ -124,6 +183,27 @@ window.onload = () => {
         if (status == 'default') {
             console.log('default stop')
             chrome.storage.local.remove('status');
+            if(notify && !fetchCalled) {
+                fetchCalled = true;
+                // notify backend to send email
+                chrome.storage.local.get(['email'], (result) => {
+                    const email = result.email;
+                    fetch(`${HOST}/notify`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({email: email, type: 'classEnd'}),
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        // console.log(data);
+                        fetchCalled = false;
+                        window.location.reload();
+                    })
+                    .catch(err => console.log(err));
+                });
+            }
         } else if (status == 'manual') {
             console.log('stopped')
             chrome.storage.local.set({status: 'stopped'})
