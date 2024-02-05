@@ -1,16 +1,39 @@
 window.onload = () => {
     chrome.storage.local.remove('status');
-    chrome.storage.local.remove('random');
-    chrome.storage.local.remove('autoJoin');
-    chrome.storage.local.remove('email');
-    chrome.storage.local.remove('notify');
 
     const targetNode = document.querySelector('#main-wrapper');
     const HOST = 'https://bye-clicker-api.vercel.app';
 
-    let random = false;
-    let autoJoin = false;
-    let notify = false;
+    // Set default values
+    let random;
+    let autoJoin;
+    let notify;
+
+    // Get values from storage
+    chrome.storage.local.get(['notify'], function(result) {
+        if (result.notify == true) {
+            notify = true;
+        } else if (result.notify == false || result == undefined ) {
+            notify = false;
+        }
+    });
+
+    chrome.storage.local.get(['random'], function(result) {
+        if (result.random == true) {
+            random = true;
+        } else if (result.random == false || result == undefined) {
+            random = false;
+        }
+    });
+
+    chrome.storage.local.get(['autoJoin'], function(result) {
+        if (result.autoJoin == true) {
+            autoJoin = true;
+        } else if (result.autoJoin == false || result == undefined) {
+            autoJoin = false;
+        }
+    });
+    
     let fetchCalled = false;
 
     const observerConfig = { 
@@ -63,13 +86,16 @@ window.onload = () => {
                                                     // console.log(data);
                                                     setTimeout(() => {
                                                         btns[optionIndex].children[0].click();
-                                                    }, 9000);
+                                                    }, 5000);
                                                     fetchCalled = false;
                                                 })
                                                 .catch(err => console.log(err));
                                             });
                                         }
                                     }
+                                    setTimeout(() => {
+                                        btns[optionIndex].children[0].click();
+                                    }, 5000);
                                 } catch (error) {
                                     console.log('buttons not found')
                                 }
@@ -137,7 +163,7 @@ window.onload = () => {
                     setTimeout(() => {
                         console.log('got the btn')
                         btns[optionIndex].children[0].click();
-                    }, 10000);
+                    }, 5000);
                 } catch (error) {
                     console.log('buttons not found')
                 }

@@ -7,6 +7,11 @@ const autoJoinBtn = document.getElementById('autoJoin');
 const notifyBtn = document.getElementById('notify');
 const email = document.getElementById('email');
 
+// Update email on change
+email.addEventListener('input', () => {
+    chrome.storage.local.set({email: email.value});
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     chrome.storage.local.get(['status'], function(result) {
         if (result.status == "started") {
