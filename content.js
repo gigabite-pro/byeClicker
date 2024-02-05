@@ -8,6 +8,18 @@ window.onload = () => {
     let random;
     let autoJoin;
     let notify;
+    let access_token;
+    let activity;
+    let courseId;
+    let activityId;
+    let requestOptions;
+    const optionsToIndex = {
+        'A': 0,
+        'B': 1,
+        'C': 2,
+        'D': 3,
+        'E': 4,
+    }
 
     // Get values from storage
     chrome.storage.local.get(['notify'], function(result) {
@@ -52,6 +64,9 @@ window.onload = () => {
                         if (url == "https://student.iclicker.com/#/polling") {
                             // Listening for next question
                             if (node.matches('.polling-page-wrapper')) {
+                                activity = JSON.parse(sessionStorage.activity);
+                                activityId = activity.activityId;
+                                courseId = activity.courseId;
                                 try {
                                     const btns = document.querySelectorAll('.btn-container');
                                     if (random) {
@@ -71,6 +86,7 @@ window.onload = () => {
                                             }
                                             callFurther();
                                         }, 1000);
+
                                         function callFurther() {
                                             chrome.storage.local.get(['email'], (result) => {
                                                 const email = result.email;
@@ -84,18 +100,15 @@ window.onload = () => {
                                                 .then(res => res.json())
                                                 .then(data => {
                                                     // console.log(data);
-                                                    setTimeout(() => {
-                                                        btns[optionIndex].children[0].click();
-                                                    }, 5000);
                                                     fetchCalled = false;
+                                                    checkAnswer(btns, optionIndex);
                                                 })
                                                 .catch(err => console.log(err));
                                             });
                                         }
                                     }
-                                    setTimeout(() => {
-                                        btns[optionIndex].children[0].click();
-                                    }, 5000);
+
+                                    checkAnswer(btns, optionIndex);
                                 } catch (error) {
                                     console.log('buttons not found')
                                 }
@@ -130,11 +143,17 @@ window.onload = () => {
                                             // console.log(data);
                                             document.querySelector('#btnJoin').click();
                                             fetchCalled = false;
+                                            setTimeout(() => {
+                                                setVariables();
+                                            }, 3000);
                                         })
                                         .catch(err => console.log(err));
                                     });
                                 }
                                 document.querySelector('#btnJoin').click();
+                                setTimeout(() => {
+                                    setVariables();
+                                }, 3000);
                             }
                         } catch (error) {
                             console.log('join button not found')
@@ -145,6 +164,46 @@ window.onload = () => {
         }
     });
 
+    function checkAnswer(btns, optionIndex) {
+        setInterval(() => {
+            fetch(`https://activity-service.iclicker.com/reporting/courses/${courseId}/activities/${activityId}/questions/view
+            `, requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                const answerOverview = data.data.questions[data.data.questions.length - 1].answerOverview;
+                if(answerOverview.length == 0) {
+                    btns[optionIndex].children[0].click();
+                    return;
+                }
+                const maxPercentageOption = answerOverview.reduce((maxOption, currentOption) => (
+                    currentOption.percentageOfTotalResponses > maxOption.percentageOfTotalResponses ? currentOption : maxOption
+                  ), answerOverview[0]);
+
+                btns[optionsToIndex[maxPercentageOption.answer]].children[0].click();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            }); 
+        }, 5000);
+    }
+
+    function setVariables() {
+        access_token = document.cookie.split('; ').find(row => row.startsWith('access_token')).split('=')[1];
+        activity = JSON.parse(sessionStorage.activity);
+        courseId = activity.courseId;
+        activityId = activity.activityId;
+        requestOptions = {
+            method: 'GET',
+            headers: {
+            'Authorization': `Bearer ${access_token}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Origin': 'https://student.iclicker.com',
+            // Add any other headers as needed
+            },
+        };
+    }
+
     function getRandomInteger(max) {
         return Math.floor(Math.random() * max);
     }
@@ -153,6 +212,9 @@ window.onload = () => {
         if (message.from == 'popup' && message.msg == 'start') {
             const url = window.location.href;
             if (url == "https://student.iclicker.com/#/polling") {
+                activity = JSON.parse(sessionStorage.activity);
+                activityId = activity.activityId;
+                courseId = activity.courseId;
                 try {
                     const btns = document.querySelectorAll('.btn-container');
                     if (random) {
@@ -160,10 +222,7 @@ window.onload = () => {
                     } else {
                         var optionIndex = 0;
                     }
-                    setTimeout(() => {
-                        console.log('got the btn')
-                        btns[optionIndex].children[0].click();
-                    }, 5000);
+                    checkAnswer(btns, optionIndex);
                 } catch (error) {
                     console.log('buttons not found')
                 }
@@ -174,6 +233,9 @@ window.onload = () => {
                             try{
                                 if(document.querySelector('#join-inner-container').style.display == 'block') {
                                     document.querySelector('#btnJoin').click();
+                                    setTimeout(() => {
+                                        setVariables();
+                                    }, 3000);
                                 }
                             } catch (error) {
                                 console.log('join button not found')
