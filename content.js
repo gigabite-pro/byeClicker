@@ -64,9 +64,9 @@ window.onload = () => {
                         if (url == "https://student.iclicker.com/#/polling") {
                             // Listening for next question
                             if (node.matches('.polling-page-wrapper')) {
-                                activity = JSON.parse(sessionStorage.activity);
-                                activityId = activity.activityId;
-                                courseId = activity.courseId;
+                                setTimeout(() => {
+                                    setVariables();
+                                }, 3000);
                                 try {
                                     const btns = document.querySelectorAll('.btn-container');
                                     if (random) {
@@ -143,17 +143,11 @@ window.onload = () => {
                                             // console.log(data);
                                             document.querySelector('#btnJoin').click();
                                             fetchCalled = false;
-                                            setTimeout(() => {
-                                                setVariables();
-                                            }, 3000);
                                         })
                                         .catch(err => console.log(err));
                                     });
                                 }
                                 document.querySelector('#btnJoin').click();
-                                setTimeout(() => {
-                                    setVariables();
-                                }, 3000);
                             }
                         } catch (error) {
                             console.log('join button not found')
@@ -212,9 +206,9 @@ window.onload = () => {
         if (message.from == 'popup' && message.msg == 'start') {
             const url = window.location.href;
             if (url == "https://student.iclicker.com/#/polling") {
-                activity = JSON.parse(sessionStorage.activity);
-                activityId = activity.activityId;
-                courseId = activity.courseId;
+                setTimeout(() => {
+                    setVariables();
+                }, 3000);
                 try {
                     const btns = document.querySelectorAll('.btn-container');
                     if (random) {
@@ -233,9 +227,6 @@ window.onload = () => {
                             try{
                                 if(document.querySelector('#join-inner-container').style.display == 'block') {
                                     document.querySelector('#btnJoin').click();
-                                    setTimeout(() => {
-                                        setVariables();
-                                    }, 3000);
                                 }
                             } catch (error) {
                                 console.log('join button not found')
