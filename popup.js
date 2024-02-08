@@ -145,3 +145,11 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         });
     }
 });
+
+// function handleLogin() {
+//     window.open('https://bye-clicker-api.vercel.app/auth/login', '_blank')
+//     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+//         const tab = tabs[0];
+//         chrome.tabs.sendMessage(tab.id, {from: 'popup', msg: 'startFetchingToken'});
+//     });
+// }

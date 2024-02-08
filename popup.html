@@ -17,48 +17,60 @@
                 ByeClicker
             </h1>
         </div>
-        <div class="start">
-            <button id="start-btn">Start Answering!</button>
+
+        <!-- Home  -->
+        <div class="home">
+            <div class="start">
+                <button id="start-btn">Start Answering!</button>
+            </div>
+            <div class="stop">
+                <button id="stop-btn">Stop Answering!</button>
+            </div>
+            <p id="runStatus">Running<span class="loading"></span></p>
+            <div class="form" id="form">
+                <div class="radio-group tooltip">
+                    <label class="checkbox style-c">
+                        <input id="random" type="checkbox"/>
+                        <div class="checkbox__checkmark"></div>
+                        <div class="checkbox__body random">Randomize Answers</div>
+                    </label>
+                    <span class="tooltiptext" style="width: 200px;">Randomizes answers</span>
+                </div>
+                <div class="auto-join-group tooltip">
+                    <label class="checkbox style-c">
+                        <input id="autoJoin" type="checkbox"/>
+                        <div class="checkbox__checkmark"></div>
+                        <div class="checkbox__body autoJoin">Auto Join</div>
+                    </label>
+                    <span class="tooltiptext" style="width: 200px;">Joins the class automatically <br>when it starts</span>
+                </div>
+                <div class="email-group">
+                    <input type="email" id="email" placeholder="Email to notify on">
+                    <span class="tooltiptext" style="width: 150px;"></span>
+                </div>
+                <div class="email-btn-group tooltip">
+                    <label class="checkbox style-c">
+                        <input id="notify" type="checkbox"/>
+                        <div class="checkbox__checkmark"></div>
+                        <div class="checkbox__body notify">Notify Me</div>
+                    </label>
+                    <span class="tooltiptext" style="width: 250px; margin-left: -200px;">Sends you a notification <br>when class starts/question appears</span>
+                </div>
+            </div>
         </div>
-        <div class="stop">
-            <button id="stop-btn">Stop Answering!</button>
-        </div>
-        <p id="runStatus">Running<span class="loading"></span></p>
-        <div class="form" id="form">
-            <div class="radio-group tooltip">
-                <label class="checkbox style-c">
-                    <input id="random" type="checkbox"/>
-                    <div class="checkbox__checkmark"></div>
-                    <div class="checkbox__body random">Randomize Answers</div>
-                </label>
-                <span class="tooltiptext" style="width: 200px;">Randomizes answers</span>
+
+        <!-- Login  -->
+        <!-- <div class="login">
+            <div class="login-form">
+                <button style="transform: scale(1);" onclick="handleLogin()">Login with Google</button>
             </div>
-            <div class="auto-join-group tooltip">
-                <label class="checkbox style-c">
-                    <input id="autoJoin" type="checkbox"/>
-                    <div class="checkbox__checkmark"></div>
-                    <div class="checkbox__body autoJoin">Auto Join</div>
-                </label>
-                <span class="tooltiptext" style="width: 200px;">Joins the class automatically <br>when it starts</span>
-            </div>
-            <div class="email-group">
-                <input type="email" id="email" placeholder="Email to notify on">
-                <span class="tooltiptext" style="width: 150px;"></span>
-            </div>
-            <div class="email-btn-group tooltip">
-                <label class="checkbox style-c">
-                    <input id="notify" type="checkbox"/>
-                    <div class="checkbox__checkmark"></div>
-                    <div class="checkbox__body notify">Notify Me</div>
-                </label>
-                <span class="tooltiptext" style="width: 250px; margin-left: -200px;">Sends you a notification <br>when class starts/question appears</span>
-            </div>
-        </div>
+        </div> -->
+
     </div>
     <hr style="border: none; margin: 0px; padding: 0px; height: 1px; background-color: white;">
     <footer class="footer">
         <p>Created by <a href="https://www.linkedin.com/in/v-sharma03/" target="_blank">Vaibhav</a></p>
-        <div class="promotion"><a href="https://byeclicker.com/#pricing" target="_blank">Get ByeClicker Pro!</a></div>
+        <!-- <div class="promotion"><a href="https://byeclicker.com/#pricing" target="_blank">Get ByeClicker Pro!</a></div> -->
     </footer>
     <script src="popup.js"></script>
 </body>
