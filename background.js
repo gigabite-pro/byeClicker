@@ -3,7 +3,6 @@ chrome.tabs.onActivated.addListener((tab) => {
                 chrome.action.setIcon({
                     path : {
                         "16" : "./assets/logo-disabled-16.png",
-                        "24" : "./assets/logo-disabled-24.png",
                         "32" : "./assets/logo-disabled-32.png",
                         "48" : "./assets/logo-disabled-48.png",
                         "128" : "./assets/logo-disabled-128.png"
@@ -17,7 +16,6 @@ chrome.tabs.onActivated.addListener((tab) => {
                 chrome.action.setIcon({
                     path : {
                         "16" : "./assets/logo-disabled-16.png",
-                        "24" : "./assets/logo-disabled-24.png",
                         "32" : "./assets/logo-disabled-32.png",
                         "48" : "./assets/logo-disabled-48.png",
                         "128" : "./assets/logo-disabled-128.png"
@@ -28,7 +26,6 @@ chrome.tabs.onActivated.addListener((tab) => {
                 chrome.action.setIcon({
                     path : {
                         "16" : "./assets/logo-16.png",
-                        "24" : "./assets/logo-24.png",
                         "32" : "./assets/logo-32.png",
                         "48" : "./assets/logo-48.png",
                         "128" : "./assets/logo-128.png"
@@ -49,7 +46,6 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
         chrome.action.setIcon({
             path : {
                 "16" : "./assets/logo-16.png",
-                "24" : "./assets/logo-24.png",
                 "32" : "./assets/logo-32.png",
                 "48" : "./assets/logo-48.png",
                 "128" : "./assets/logo-128.png"
@@ -61,7 +57,6 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
         chrome.action.setIcon({
             path : {
                 "16" : "./assets/logo-disabled-16.png",
-                "24" : "./assets/logo-disabled-24.png",
                 "32" : "./assets/logo-disabled-32.png",
                 "48" : "./assets/logo-disabled-48.png",
                 "128" : "./assets/logo-disabled-128.png"

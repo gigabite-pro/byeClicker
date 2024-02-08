@@ -13,6 +13,7 @@ window.onload = () => {
     let courseId;
     let activityId;
     let requestOptions;
+    let intervalId;
     const optionsToIndex = {
         'A': 0,
         'B': 1,
@@ -101,13 +102,14 @@ window.onload = () => {
                                                 .then(data => {
                                                     // console.log(data);
                                                     fetchCalled = false;
+                                                    clearInterval(intervalId);
                                                     checkAnswer(btns, optionIndex);
                                                 })
                                                 .catch(err => console.log(err));
                                             });
                                         }
                                     }
-
+                                    clearInterval(intervalId);
                                     checkAnswer(btns, optionIndex);
                                 } catch (error) {
                                     console.log('buttons not found')
@@ -159,7 +161,7 @@ window.onload = () => {
     });
 
     function checkAnswer(btns, optionIndex) {
-        setInterval(() => {
+        intervalId = setInterval(() => {
             fetch(`https://activity-service.iclicker.com/reporting/courses/${courseId}/activities/${activityId}/questions/view
             `, requestOptions)
             .then(response => response.json())
@@ -216,6 +218,7 @@ window.onload = () => {
                     } else {
                         var optionIndex = 0;
                     }
+                    clearInterval(intervalId);
                     checkAnswer(btns, optionIndex);
                 } catch (error) {
                     console.log('buttons not found')

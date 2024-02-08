@@ -9,35 +9,56 @@
 </head>
 <body>
     <div class="container" id="container">
-        <div class="logo">
+        <div class="robot"></div>
+        <div class="person"></div>
+        <div class="top">
+            <div class="logo"></div>
+            <h1>
+                ByeClicker
+            </h1>
         </div>
-        <h1>ByeClicker</h1>
-        <p id="runStatus">Running</p>
-        <button id="start-btn">Start</button>
-        <button id="stop-btn">Stop</button>
-        <div class="radio-group tooltip">
-            <input type="checkbox" id="random">
-            <label for="random" class="random">Random</label>
-            <span class="tooltiptext">Randomizes Answers</span>
+        <div class="start">
+            <button id="start-btn">Start Answering!</button>
         </div>
-        <div class="auto-join-group tooltip">
-            <input type="checkbox" id="autoJoin">
-            <label for="autoJoin" class="autoJoin">Auto Join</label>
-            <span class="tooltiptext" style="width: 150px;">Joins class automatically <br>when it starts</span>
+        <div class="stop">
+            <button id="stop-btn">Stop Answering!</button>
         </div>
-        <div class="email-group">
-            <input type="email" id="email" placeholder="Email">
-            <span class="tooltiptext" style="width: 150px;"></span>
-        </div>
-        <div class="email-btn-group tooltip">
-            <input type="checkbox" id="notify">
-            <label for="notify" class="autoJoin">Notify Me</label>
-            <span class="tooltiptext" style="width: 150px;">Sends you a notification <br>when class starts/question appears</span>
+        <p id="runStatus">Running<span class="loading"></span></p>
+        <div class="form" id="form">
+            <div class="radio-group tooltip">
+                <label class="checkbox style-c">
+                    <input id="random" type="checkbox"/>
+                    <div class="checkbox__checkmark"></div>
+                    <div class="checkbox__body random">Randomize Answers</div>
+                </label>
+                <span class="tooltiptext" style="width: 200px;">Randomizes answers</span>
+            </div>
+            <div class="auto-join-group tooltip">
+                <label class="checkbox style-c">
+                    <input id="autoJoin" type="checkbox"/>
+                    <div class="checkbox__checkmark"></div>
+                    <div class="checkbox__body autoJoin">Auto Join</div>
+                </label>
+                <span class="tooltiptext" style="width: 200px;">Joins the class automatically <br>when it starts</span>
+            </div>
+            <div class="email-group">
+                <input type="email" id="email" placeholder="Email to notify on">
+                <span class="tooltiptext" style="width: 150px;"></span>
+            </div>
+            <div class="email-btn-group tooltip">
+                <label class="checkbox style-c">
+                    <input id="notify" type="checkbox"/>
+                    <div class="checkbox__checkmark"></div>
+                    <div class="checkbox__body notify">Notify Me</div>
+                </label>
+                <span class="tooltiptext" style="width: 250px; margin-left: -200px;">Sends you a notification <br>when class starts/question appears</span>
+            </div>
         </div>
     </div>
-    <hr style="border: none; margin: 0px; padding: 0px; height: 1px; background-color: black;">
+    <hr style="border: none; margin: 0px; padding: 0px; height: 1px; background-color: white;">
     <footer class="footer">
         <p>Created by <a href="https://www.linkedin.com/in/v-sharma03/" target="_blank">Vaibhav</a></p>
+        <div class="promotion"><a href="https://byeclicker.com/#pricing" target="_blank">Get ByeClicker Pro!</a></div>
     </footer>
     <script src="popup.js"></script>
 </body>

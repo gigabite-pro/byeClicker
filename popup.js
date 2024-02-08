@@ -15,12 +15,28 @@ email.addEventListener('input', () => {
 document.addEventListener('DOMContentLoaded', () => {
     chrome.storage.local.get(['status'], function(result) {
         if (result.status == "started") {
-            runStatus.style.display = 'block';
             startBtn.style.display = 'none';
+
+            runStatus.style.display = 'block';
             stopBtn.style.display = 'block';
-        } else if (result.status == "stopped" || result == undefined) {
+            runStatus.style.transform = 'scale(0)';
+            runStatus.style.transform = 'scale(0)';
+
+            setTimeout(() => {
+                runStatus.style.transition = '0.5s';
+                runStatus.style.transform = 'scale(1)';
+                
+                stopBtn.style.transition = '0.5s';
+                stopBtn.style.transform = 'scale(1)';
+            }, 100);
+        } else if (result.status == "stopped" || result.status == undefined) {
             runStatus.style.display = 'none';
+
+            document.getElementById('form').style.marginTop = '30px';
             startBtn.style.display = 'block';
+            startBtn.style.transition = '0.5s';
+            startBtn.style.transform = 'scale(1)';
+
             stopBtn.style.display = 'none';
         }
     });
@@ -28,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     chrome.storage.local.get(['random'], function(result) {
         if (result.random == true) {
             randomBtn.checked = true;
-        } else if (result.random == false || result == undefined) {
+        } else if (result.random == false || result.random == undefined) {
             randomBtn.checked = false;
         }
     });
@@ -36,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     chrome.storage.local.get(['autoJoin'], function(result) {
         if (result.autoJoin == true) {
             autoJoinBtn.checked = true;
-        } else if (result.autoJoin == false || result == undefined) {
+        } else if (result.autoJoin == false || result.random == undefined) {
             autoJoinBtn.checked = false;
         }
     });
@@ -52,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     chrome.storage.local.get(['notify'], function(result) {
         if (result.notify == true) {
             notifyBtn.checked = true;
-        } else if (result.notify == false || result == undefined ) {
+        } else if (result.notify == false || result.notify == undefined ) {
             notifyBtn.checked = false;
         }
     });
@@ -69,19 +85,51 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         container.innerHTML = '<h1>ByeClicker works only on iCliker pages</h1>';
     } else {
         startBtn.addEventListener('click', () => {
-            runStatus.style.display = 'block';
-            startBtn.style.display = 'none';
-            stopBtn.style.display = 'block';
+            startBtn.style.transition = '0.5s';
+            startBtn.style.transform = 'scale(0)';
+            setTimeout(() => {
+                startBtn.style.display = 'none';
+
+                runStatus.style.display = 'block';
+                stopBtn.style.display = 'block';
+                runStatus.style.transform = 'scale(0)';
+                runStatus.style.transform = 'scale(0)';
+
+                setTimeout(() => {
+                    runStatus.style.transition = '0.5s';
+                    runStatus.style.transform = 'scale(1)';
+                    
+                    stopBtn.style.transition = '0.5s';
+                    stopBtn.style.transform = 'scale(1)';
+                }, 100);
+
+                
+            }, 500);
             chrome.tabs.sendMessage(tab.id, {from: 'popup', msg: 'start'});
-            window.close();
         });
         
         stopBtn.addEventListener('click', () => {
-            runStatus.style.display = 'none';
-            startBtn.style.display = 'block';
-            stopBtn.style.display = 'none';
+            runStatus.style.transition = '0.5s';
+            runStatus.style.transform = 'scale(0)';
+
+            stopBtn.style.transition = '0.5s';
+            stopBtn.style.transform = 'scale(0)';
+
+            setTimeout(() => {
+                document.getElementById('form').style.marginTop = '30px';
+                runStatus.style.display = 'none';
+                stopBtn.style.display = 'none';
+
+                startBtn.style.display = 'block';
+                startBtn.style.transform = 'scale(0)';
+                setTimeout(() => {
+                    startBtn.style.transition = '0.5s';
+                    startBtn.style.transform = 'scale(1)';
+                }, 100);
+                // startBtn.style.transition = '0.5s';
+                // startBtn.style.transform = 'scale(1)';
+            }, 500);
             chrome.tabs.sendMessage(tab.id, {from: 'popup', msg: 'stop'});
-            window.close();
         });
 
         randomBtn.addEventListener('click', () => {
