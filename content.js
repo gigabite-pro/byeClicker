@@ -190,6 +190,10 @@ window.onload = () => {
 
     function setVariables() {
         access_token = sessionStorage.getItem('access_token');
+        if (access_token == null || access_token == undefined || access_token == '') {
+            // get access token from cookies
+            access_token = document.cookie.split('; ').find(row => row.startsWith('access_token')).split('=')[1];
+        }
         activity = JSON.parse(sessionStorage.getItem('activity'));
         courseId = activity.courseId;
         activityId = activity.activityId;
