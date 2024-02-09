@@ -105,7 +105,12 @@ window.onload = () => {
                                                     clearInterval(intervalId);
                                                     checkAnswer(btns, optionIndex);
                                                 })
-                                                .catch(err => console.log(err));
+                                                .catch(err => {
+                                                    console.log(err);
+                                                    fetchCalled = false;
+                                                    clearInterval(intervalId);
+                                                    checkAnswer(btns, optionIndex);
+                                                });
                                             });
                                         }
                                     }
@@ -184,8 +189,8 @@ window.onload = () => {
     }
 
     function setVariables() {
-        access_token = document.cookie.split('; ').find(row => row.startsWith('access_token')).split('=')[1];
-        activity = JSON.parse(sessionStorage.activity);
+        access_token = sessionStorage.getItem('access_token');
+        activity = JSON.parse(sessionStorage.getItem('activity'));
         courseId = activity.courseId;
         activityId = activity.activityId;
         requestOptions = {
@@ -265,6 +270,7 @@ window.onload = () => {
         if (status == 'default') {
             console.log('default stop')
             chrome.storage.local.remove('status');
+            clearInterval(intervalId);
             if(notify && !fetchCalled) {
                 fetchCalled = true;
                 // notify backend to send email
@@ -288,6 +294,7 @@ window.onload = () => {
             }
         } else if (status == 'manual') {
             console.log('stopped')
+            clearInterval(intervalId);
             chrome.storage.local.set({status: 'stopped'})
         }
     }
