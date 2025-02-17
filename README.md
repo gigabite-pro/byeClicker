@@ -1,3 +1,5 @@
+# PLEASE DO NOT REFER TO THIS README. IT DOESN'T WORK LIKE THIS ANYMORE.
+
 # byeClicker
 A Chrome extension that automatically answers iClicker poll questions for you so that you don't have to worry about attendance anymore.
 
