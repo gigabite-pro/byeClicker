@@ -139,6 +139,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         });
 
         notifyBtn.addEventListener("click", () => {
+            return;
             chrome.tabs.sendMessage(tab.id, {
                 from: "popup",
                 msg: "notify",

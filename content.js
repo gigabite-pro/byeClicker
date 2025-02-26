@@ -152,10 +152,11 @@ window.onload = () => {
                                                                 clearInterval(
                                                                     intervalId
                                                                 );
-                                                                checkAnswer(
-                                                                    btns,
-                                                                    optionIndex
-                                                                );
+                                                                // checkAnswer(
+                                                                //     btns,
+                                                                //     optionIndex
+                                                                // );
+                                                                selectAnswer();
                                                             })
                                                             .catch((err) => {
                                                                 console.log(
@@ -165,17 +166,19 @@ window.onload = () => {
                                                                 clearInterval(
                                                                     intervalId
                                                                 );
-                                                                checkAnswer(
-                                                                    btns,
-                                                                    optionIndex
-                                                                );
+                                                                // checkAnswer(
+                                                                //     btns,
+                                                                //     optionIndex
+                                                                // );
+                                                                selectAnswer();
                                                             });
                                                     }
                                                 );
                                             }
                                         }
                                         clearInterval(intervalId);
-                                        checkAnswer(btns, optionIndex);
+                                        // checkAnswer(btns, optionIndex);
+                                        selectAnswer();
                                     } catch (error) {
                                         console.log("buttons not found");
                                     }
@@ -291,6 +294,15 @@ window.onload = () => {
         }, 5000);
     }
 
+    function selectAnswer() {
+        const btns = document.querySelectorAll(".btn-container");
+        setTimeout(() => {
+            btns[
+                optionsToIndex['A']
+            ].children[0].click()
+        }, 5000);
+    }
+
     function setActivityId() {
         fetch(
             `https://api.iclicker.com/v2/courses/${sessionStorage.getItem(
@@ -305,7 +317,7 @@ window.onload = () => {
                     Accept: "application/json",
                     "Content-Type": "application/json",
                     Origin: "https://student.iclicker.com",
-                    // Add any other headers as needed
+                    
                 },
             }
         )
@@ -370,7 +382,8 @@ window.onload = () => {
                         var optionIndex = 0;
                     }
                     clearInterval(intervalId);
-                    checkAnswer(btns, optionIndex);
+                    // checkAnswer(btns, optionIndex);
+                    selectAnswer();
                 } catch (error) {
                     console.log("buttons not found");
                 }
@@ -414,6 +427,7 @@ window.onload = () => {
     });
 
     function startObserver() {
+        const url = window.location.href;
         targetNode = document.querySelector("#wrapper");
         // console.log(targetNode);
         observer.observe(targetNode, observerConfig);
